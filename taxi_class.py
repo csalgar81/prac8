@@ -4,6 +4,8 @@ CP1404/CP5632 Practical
 Car class
 """
 
+from random import randint
+
 
 class Car:
     """ represent a car object """
@@ -38,15 +40,15 @@ class Taxi(Car):
     """ specialised version of a Car that includes fare costs """
 
     price_per_km = 1.2
+
     def __init__(self, name, fuel):
         """ initialise a Taxi instance, based on parent class Car """
         super().__init__(name, fuel)
-        self.price_per_km = Taxi.price_per_km
         self.current_fare_distance = 0
 
     def __str__(self):
         """ return a string representation like a car but with current fare distance"""
-        return "{}, ${:.2f}/km, {}km on current fare".format(super().__str__(), Taxi.price_per_km,
+        return "{}, ${:.2f}/km, {}km on current fare".format(super().__str__(), self.price_per_km,
                                                              self.current_fare_distance)
 
     def get_fare(self):
@@ -62,3 +64,20 @@ class Taxi(Car):
         distance_driven = super().drive(distance)
         self.current_fare_distance += distance_driven
         return distance_driven
+
+
+class UnreliableCar(Car):
+    def __init__(self, name, fuel, reliability):
+        super().__init__(name, fuel)
+        self.reliability = reliability
+
+    def drive(self, distance):
+        if randint(0, 100) < self.reliability:
+            super().drive(distance)
+
+class SilverServiceTaxi(Taxi):
+
+    def __init__(self,name,fuel,constructor):
+        super().__init__(name,fuel)
+        self.
+
