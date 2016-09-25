@@ -77,7 +77,22 @@ class UnreliableCar(Car):
 
 class SilverServiceTaxi(Taxi):
 
-    def __init__(self,name,fuel,constructor):
+    flagfall = 4.5
+
+    def __init__(self,name,fuel,fanciness):
         super().__init__(name,fuel)
-        self.
+        self.price_per_km *= fanciness
+
+    def get_fare(self):
+        """ get the price for the SilverServiceTaxi trip """
+        return self.price_per_km * self.current_fare_distance + SilverServiceTaxi.flagfall
+
+    def __str__(self):
+        return "{}, ${:.2f}/km plus flagfall of ${:.2f}".format(super().__str__(),self.price_per_km,self.flagfall)
+
+
+
+
+        # return "{}, ${:.2f}/km, {}km on current fare".format(super().__str__(), self.price_per_km,
+        #                                                  self.current_fare_distance)
 
